@@ -30,9 +30,8 @@ export default async function sendSMS(phoneNumbers, templateId, templateParams) 
   const processedPhoneNumbers = phoneNumbers.map((item) => {
     if (item.startsWith('+')) {
       return item;
-    } else {
-      return `+86${item}`;
     }
+    return `+86${item}`;
   });
   // 调用云函数来发送短信
   const { result } = await uniCloud.callFunction({
@@ -42,8 +41,8 @@ export default async function sendSMS(phoneNumbers, templateId, templateParams) 
       action: 'sendSMS',
       phoneNumbers: processedPhoneNumbers,
       templateId,
-      templateParams,
-    },
+      templateParams
+    }
   });
   return result;
-};
+}

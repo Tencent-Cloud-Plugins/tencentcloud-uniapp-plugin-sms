@@ -5,11 +5,14 @@
 | ----     | ---------------- |
 | 中文名称   | 腾讯云短信（SMS）插件 |
 | 英文名称   | tencentcloud-plugin-sms |
-| 最新版本   | v1.0.0 (2020.07.22) |
+| 最新版本   | v1.0.11 (2021.01.11) |
 | 适用平台   | [DCloud uni-app](https://uniapp.dcloud.net.cn) |
 | 适用产品   | [腾讯云短信（SMS）](https://cloud.tencent.com/product/sms) |
 | GitHub项目| [tencentcloud-uniapp-plugin-sms](https://github.com/Tencent-Cloud-Plugins/tencentcloud-uniapp-plugin-sms) |
+| gitee项目| [tencentcloud-uniapp-plugin-sms](https://gitee.com/Tencent-Cloud-Plugins/tencentcloud-uniapp-plugin-sms) |
+| Demo项目   | [tencentcloud-uniapp-plugin-example](https://github.com/Tencent-Cloud-Plugins/tencentcloud-uniapp-plugin-example) |
 | 主创团队   | 腾讯云中小企业产品中心（SMB Product Center of Tencent Cloud） |
+| 兼容平台   | H5、小程序、APP |
 
 一款帮助开发者在uni-app项目开发中快捷使用腾讯云短信（SMS）产品功能的插件。
 
@@ -37,11 +40,12 @@
 1. 访问 DCloud 插件市场的 [腾讯云插件 - 云函数模板](https://ext.dcloud.net.cn/plugin?id=2139) 详情页；
 2. 点击详情页右上角 **使用 HBuilderX 导入插件**，将云函数模板导入到您的项目中；
 ![](./images/guide/guide-1.png)
-3. 在项目中打开 _cloudfunctions/tencentcloud-plugin/config.js_ 文件，将腾讯云的密钥信息配置进去，可以在腾讯云 [API 密钥管理](https://console.cloud.tencent.com/cam/capi) 中获取 SecretId、SecretKey 和 APPID；
+3. 在项目中打开 _cloudfunctions/tencentcloud-plugin/config.js 文件，将腾讯云的密钥信息配置进去，可以在腾讯云 [API 密钥管理](https://console.cloud.tencent.com/cam/capi) 中获取 SecretId、SecretKey 和 APPID；
 ![](./images/guide/guide-2.png)
-4. 在[uniCloud控制台](https://unicloud.dcloud.net.cn/login)注册HBuild账号并登录，创建[云服务空间](https://uniapp.dcloud.net.cn/uniCloud/concepts/space)；
+4. 在项目打开 _cloudfunctions/tencentcloud-plugin/sms/config.js 文件，将短信的appId和appSign配置上，可以在[短信控制台](https://console.cloud.tencent.com/smsv2)进行查看。如果需要使用插件验证码功能则需要将verificationCodeCollection和verificationCodeTemplateId字段配置上；
+5. 在[uniCloud控制台](https://unicloud.dcloud.net.cn/login)注册HBuild账号并登录，创建[云服务空间](https://uniapp.dcloud.net.cn/uniCloud/concepts/space)；
 ![](./images/guide/guide-3.png)
-5. 绑定云函数的云服务空间，将[云函数](https://uniapp.dcloud.net.cn/uniCloud/concepts/cloudfunction) [**上传部署**](https://uniapp.dcloud.net.cn/uniCloud/quickstart?id=rundebug) 到您的[云服务空间](https://uniapp.dcloud.net.cn/uniCloud/concepts/space)；
+6. 绑定云函数的云服务空间，将[云函数](https://uniapp.dcloud.net.cn/uniCloud/concepts/cloudfunction) [**上传部署**](https://uniapp.dcloud.net.cn/uniCloud/quickstart?id=rundebug) 到您的[云服务空间](https://uniapp.dcloud.net.cn/uniCloud/concepts/space)；
 ![](./images/guide/guide-4.png)
 
 > 如果您之前在使用其它腾讯云产品的 uni-app 插件时已经导入过此云函数模板，则前 4 个步骤可以省略。
@@ -76,7 +80,7 @@ export default {
         const phoneNumbers = ['+86155****1234'];
         const templateId = '12**34'; // 在腾讯云短信控制台申请
         const templateParams = ['动态填充内容'];
-        const { SendStatusSet } = await sendSMS(phoneNumbers, templateIds, templateParams);
+        const { SendStatusSet } = await sendSMS(phoneNumbers, templateId, templateParams);
       } catch (error) {
         console.log(error);
       }
@@ -116,15 +120,28 @@ export default {
 | ----     | ---------------- |
 | DCloud插件市场 | [腾讯云短信（SMS）插件](https://ext.dcloud.net.cn/plugin?id=2361) |
 
-## 6. GitHub版本迭代记录
+## 6. FAQ
+> 1. Q:有没有demo示例？
+>    
+>    A：请查看demo示例[tencentcloud-uniapp-plugin-example](https://github.com/Tencent-Cloud-Plugins/tencentcloud-uniapp-plugin-example)
 
-### 6.1. tencentcloud-uniapp-plugin-sms v1.0.0
+
+## 7. GitHub版本迭代记录
+
+### 7.1. tencentcloud-uniapp-plugin-sms v1.0.1
+
+- 优化代码
+### 7.2. tencentcloud-uniapp-plugin-sms v1.0.0
 
 - 新增发送短信功能
 - 新增发送短信验证码及校验验证码功能
 - 新增获取腾讯云SMS短信产品用户套餐包统计信息功能
 
-## 7. 联系我们
+## 8. 联系我们
 
-&nbsp;&nbsp;&nbsp;扫码备注“春雨”来联络到我们</br>
-![](./images/qrcode.png)
+如果您是用户，欢迎加入我们的[官方交流社区](https://dnspod.chat/category/10)，反馈
+- bug和故障，获取帮助。
+- 新的插件功能需求。
+- 新的开源应用插件适配需求。
+
+如果您是开发者，欢迎参与我们[插件开源项目](https://github.com/Tencent-Cloud-Plugins)，和我们一起修复插件问题，为更多开源应用适配腾讯云插件。

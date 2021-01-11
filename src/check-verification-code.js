@@ -15,19 +15,24 @@
  */
 
 /**
- * 发送短信验证码（需要调用云函数，请先配置好云函数）
+ * 校验短信验证码（需要调用云函数，请先配置好云函数）
  * @async
  * @param {string} phoneNumber - 手机号码
- * @return {Promise<void>} 验证码发送状态（无异常代表发送成功）
+ * @param {string} verificationCode - 验证码
+ * @return {Promise<void>} 验证码校验结果（无异常代表校验成功）
  */
-export default async function sendVerificationCode(phoneNumber) {
-  // 调用云函数来发送短信
+export default async function checkVerificationCode(phoneNumber, verificationCode) {
+  if (!phoneNumber || !verificationCode) {
+    throw new Error('手机号码和验证码必传');
+  }
+  // 调用云函数来校验验证码
   await uniCloud.callFunction({
     name: 'tencentcloud-plugin',
     data: {
       module: 'SMS',
-      action: 'sendVerificationCode',
-      phoneNumber
+      action: 'checkVerificationCode',
+      phoneNumber,
+      verificationCode
     }
   });
 }

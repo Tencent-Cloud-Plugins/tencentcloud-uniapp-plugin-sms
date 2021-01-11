@@ -27,8 +27,8 @@ export default async function getPackageStatus(limit = 10) {
     data: {
       module: 'SMS',
       action: 'getPackagesStatistics',
-      limit,
-    },
+      limit
+    }
   });
   return result;
-};
+}
